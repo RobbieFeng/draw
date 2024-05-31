@@ -45,7 +45,7 @@ public class DrawUtil {
 			System.out.println("**********************************************************************");
 			System.out.println("剩余人数: " + (nPeople-alreadyDrawn-1));
 			// Add the winner to the list
-			result.put("Winner " + alreadyDrawn, prizes.get(randomint));
+			result.put(name, prizes.get(randomint));
 			prizes.remove(randomint);
 			alreadyDrawn++;
 			
