@@ -9,4 +9,9 @@ public class Prize {
 		this.description = description;
 	}
 	
+	@Override
+	public String toString() {
+		return name + ": " + description;
+	}
+	
 }

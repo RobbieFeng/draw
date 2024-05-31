@@ -2,12 +2,15 @@ package com.example.demo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class DrawUtil {
 	private List<Prize> prizes;
 	private int nPeople;
 	private int alreadyDrawn;
+
+	public Map<String, Prize> result = new java.util.HashMap<String, Prize>();
 	
 	public DrawUtil(int nPrize, int nPeople) {
 		this.nPeople = nPeople;
@@ -24,7 +27,7 @@ public class DrawUtil {
 		this.alreadyDrawn = 0;
 	}
 	
-	public void DrawOne() {
+	public void DrawOne(String name) {
 		//可能不公平，但模拟现场用抽奖箱
 		//Check if all attendees have drawn
 		if (alreadyDrawn == nPeople) {
@@ -38,19 +41,28 @@ public class DrawUtil {
 		if (randomint < prizes.size()) {
 			// Win
 			System.out.println("**********************************************************************");
-			System.out.println("Congratulations! You have won " + prizes.get(randomint).name);
-			System.out.println("Description: " + prizes.get(randomint).description);
+			System.out.println("恭喜! 你获得 " + prizes.get(randomint));
 			System.out.println("**********************************************************************");
-			System.out.println("People left: " + (nPeople-alreadyDrawn-1));
+			System.out.println("剩余人数: " + (nPeople-alreadyDrawn-1));
+			// Add the winner to the list
+			result.put("Winner " + alreadyDrawn, prizes.get(randomint));
 			prizes.remove(randomint);
 			alreadyDrawn++;
+			
 		} else {
 			//Lose
 			System.out.println("**********************************************************************");
-			System.out.println("Sorry, you have not won any prize.");
+			System.out.println("很遗憾. 您没有获得奖品");
 			System.out.println("**********************************************************************");
-			System.out.println("People left: " + (nPeople-alreadyDrawn-1));
+			System.out.println("剩余人数: " + (nPeople-alreadyDrawn-1));
 			alreadyDrawn++;
+		}
+		
+	}
+
+	public void printList() {
+		for (String key : result.keySet()) {
+			System.out.println(key + ": " + result.get(key));
 		}
 		
 	}
